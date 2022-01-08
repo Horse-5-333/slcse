@@ -1,0 +1,140 @@
+:root {
+    min-height: 300vh;
+    font-family: 'Roboto Slab', serif;
+    background-color: #EEEEFF;
+    color: #0E1116;
+    font-size: 20px;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.week {
+    display: flex;
+    width: 60%;
+    border-left: 2px solid #434e64;
+    /* background-color: #0E111655; */
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    margin-left: 20%;
+    margin-top: 100vh;
+    z-index: -1;
+    flex-direction: row;
+}
+
+.break {
+    width: 60%;
+    height: 300vh;
+    position: absolute;
+    top: 0;
+    margin-left: 20%;
+    border-left: 2px solid #0E111655;
+}
+
+.time {
+    font-size: 2rem;
+    width: 19.5%
+}
+
+.date {
+    width: 100%;
+    text-align: right;
+    z-index: 2;
+    position: absolute;
+}
+
+.day {
+    font-size: 1.1rem;
+    width: 19.5%
+}
+
+.line {
+    background-color: #0E1116;
+    width: 100%;
+    margin-left: 0;
+    height: 3px;
+}
+
+.scale {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    position: absolute;
+    top: 0;
+    color: #0E111677;
+    margin-left: 0;
+    width: 99.5%;
+}
+
+.tick {
+    border-top: 2px solid #0E111610;
+    /* border-left: 1px solid #0E111677; */
+    padding-left: 0.25vw;
+    width: 100%;
+    
+}
+
+.full {
+    height: calc(3.125vh - 2px);
+}
+
+.quar {
+    height: calc(3.125vh - 1px);
+    border-top: 1px solid #0E111610;
+}
+
+.weekday {
+    display: flex;
+    width: 60%;
+    position: fixed;
+    height: 5vh;
+    background-color: #0E111611;
+    top: 0;
+    margin-left: 20%;
+    border-bottom-right-radius: 2vh;
+    border-bottom-left-radius: 2vh;
+    z-index: 3;
+}
+
+.wday {
+    width: 33.3%;
+    text-align: center;
+    font-size: 1.75rem;
+    padding-top: calc(2.5vh - 1.25rem);
+}
+
+.timeblock {
+    position: absolute;
+    width: 30%;
+    margin-left: 1%;
+    color: #0E1116;
+    padding-left: 1%;
+    margin-right: 1%;
+    border-radius: 5px;
+}
+
+.dayview {
+    width: 20vw;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+:-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.until {
+    font-size: 1.5rem;
+    width: 19.5%
+}

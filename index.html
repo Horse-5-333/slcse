@@ -1,0 +1,215 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>SLCSE Bell Periods</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<main>
+    <div class="weekday" id="weekday">
+        <div class="wday" id="day1">Today</div>
+        <div class="wday" id="day2"></div>
+        <div class="wday" id="day3"></div>
+    </div>
+    <body>
+        <div class="date" id="date">
+            <div class="until" id="until"></div>
+            <div class="line" id="line"></div>
+            <div class="time" id="timer"></div>
+            <div class="day" id="day"></div>
+        </div>
+
+        <div class="week" id="week">
+            <div class="dayview" id="blocks1">
+                <div id="w12" class="timeblock odd"></div>
+                <div id="w13" class="timeblock even"></div>
+                <div id="w14" class="timeblock odd"></div>
+                <div id="w15" class="timeblock even"></div>
+                <div id="w16" class="timeblock odd"></div>
+                <div id="w17" class="timeblock even"></div>
+                <div id="w18" class="timeblock odd"></div>
+                <div id="w19" class="timeblock even"></div>
+            </div>
+            <div class="dayview" id="blocks2">
+                <div id="w22" class="timeblock odd"></div>
+                <div id="w23" class="timeblock even"></div>
+                <div id="w24" class="timeblock odd"></div>
+                <div id="w25" class="timeblock even"></div>
+                <div id="w26" class="timeblock odd"></div>
+                <div id="w27" class="timeblock even"></div>
+                <div id="w28" class="timeblock odd"></div>
+                <div id="w29" class="timeblock even"></div>
+            </div>
+            <div class="dayview" id="blocks3">
+                <div id="w32" class="timeblock odd"></div>
+                <div id="w33" class="timeblock even"></div>
+                <div id="w34" class="timeblock odd"></div>
+                <div id="w35" class="timeblock even"></div>
+                <div id="w36" class="timeblock odd"></div>
+                <div id="w37" class="timeblock even"></div>
+                <div id="w38" class="timeblock odd"></div>
+                <div id="w39" class="timeblock even"></div>
+            </div>
+        </div>
+
+        <div class="break">
+        </div>
+        
+        <div class="scale" id="scale">
+            <div class="tick full">12:00</div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+
+            <div class="tick full">
+                1:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                2:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                3:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                4:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                5:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                6:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                7:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                8:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                9:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                10:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                11:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            
+            <div class="tick full">
+                12:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+
+            <div class="tick full">
+                1:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                2:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                3:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                4:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                5:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                6:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                7:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                8:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                9:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                10:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick full">
+                11:00
+            </div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+            <div class="tick quar"></div>
+        </div>
+    </body>
+</main>
+</html>
