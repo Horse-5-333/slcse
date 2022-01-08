@@ -153,8 +153,8 @@ function updateDate() {
     // adjust timeline accordingly
     dateHeight = (dateHeight - getOffset(document.querySelector("#until")).height).toString() + "px";
     $("#date").css("top", dateHeight);
-    console.log(dateHeight)
 
+    
     // checks size of two objects
     function getOffset(el) {
         const rect = el.getBoundingClientRect();
