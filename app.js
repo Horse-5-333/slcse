@@ -154,7 +154,7 @@ function updateDate() {
     dateHeight = (dateHeight - getOffset(document.querySelector("#until")).height).toString() + "px";
     $("#date").css("top", dateHeight);
 
-    
+
     // checks size of two objects
     function getOffset(el) {
         const rect = el.getBoundingClientRect();
@@ -181,7 +181,7 @@ $(document).ready(function(){
 
     // scrolls to timeline
     var offTop = $("#date").offset().top;
-    $('html, body').animate({ scrollTop: offTop - window.innerHeight / 4}, 1);
+    $('html, body').animate({ scrollTop: offTop - window.innerHeight / 4}, 300);
     needScroll = false;
 
     // updates the date every half second
