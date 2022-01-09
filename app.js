@@ -143,7 +143,7 @@ function updateDate() {
             tilBell.setHours(0)
             tilBell.setSeconds((getOffset(el).top + getOffset(el).height - dateHeight) / windowH * 86400);
             document.querySelector('#until').textContent = "Bell rings in " + tilBell.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'});
-            found = true;
+            found = false;
         }
     }
     if (!found) {
@@ -152,7 +152,7 @@ function updateDate() {
     }
 
     // adjust timeline accordingly
-    dateHeight = (dateHeight - getOffset(document.querySelector("#until")).height).toString() + "px";
+    dateHeight = (dateHeight - getOffset(document.querySelector("#until")).height - 3).toString() + "px";
     $("#date").css("top", dateHeight);
 
 

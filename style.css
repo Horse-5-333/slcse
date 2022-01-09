@@ -38,7 +38,8 @@ body {
 
 .time {
     font-size: 2rem;
-    width: 19.5%
+    width: 19.5%;
+    animation: clockBlink 3s linear 0s infinite;
 }
 
 .date {
@@ -84,8 +85,12 @@ body {
 }
 
 .quar {
-    height: calc(3.125vh - 1px);
-    border-top: 1px solid #0E111610;
+    height: calc(3.125vh);
+    border-top: none;
+    background-image: linear-gradient(to right, #0e111631 10%, rgba(255, 255, 255, 0) 0%);
+    background-position: top;
+    background-size: 20px 2px;
+    background-repeat: repeat-x;
 }
 
 .weekday {
@@ -137,4 +142,13 @@ html {
 .until {
     font-size: 1.5rem;
     width: 19.5%
+}
+
+@keyframes clockBlink {
+    30% {
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
 }
