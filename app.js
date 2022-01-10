@@ -1,21 +1,50 @@
+function ordinal_suffix_of(i) {
+    var j = i % 10,
+        k = i % 100;
+    if (j == 1 && k != 11) {
+        return i + "st";
+    }
+    if (j == 2 && k != 12) {
+        return i + "nd";
+    }
+    if (j == 3 && k != 13) {
+        return i + "rd";
+    }
+    return i + "th";
+}
+
+
 function setBlocks() {
     var windowH = window.innerHeight * 3;
     var secInDay = 86400;
 
-    function setBlock(id, top, height, color) {
+    function setBlock(id, top, height, color, academy = false) {
+
+        // makes boxes appear and look nice
         $(id).css("top", (top/secInDay * 300).toString() + "vh");
         $(id).css("height", "calc(" + (height/secInDay * 300).toString() + "vh" + " - 3px)");
         $(id).css("background-color", color + "55");
         $(id).css("border-top", "3px solid " + color + "55");
         $(id).css("color", color);
         $(id).css("box-shadow", '0 0 1.5vw -0.8vw' + color);
+
+
         document.querySelector(id).style.display = "";
         var time = new Date(null);
-        time.setSeconds(top - 32400);
+        time.setSeconds(top - 32400); // offsets the date to start at 8:30
         var start = time.toLocaleTimeString("en-us", { hour: 'numeric', minute: '2-digit' })
         time.setSeconds(time.getSeconds() + height);
         var end = time.toLocaleTimeString("en-us", { hour: 'numeric', minute: '2-digit' })
-        document.querySelector(id).textContent = start + " - " + end;
+
+        // gets period number and writes the block times and title
+        if (academy) {
+            document.querySelector(id).textContent = "Academy\r\n" + start + " - " + end;
+        }
+        else {
+            var re = /[0-9]/g;
+            var period = (Number(id.match(re)[1]) - 1).toString();
+            document.querySelector(id).textContent = ordinal_suffix_of(Number(period)) + " period\r\n" + start + " - " + end;
+        }
     }
 
     function addDays(date, days) {
@@ -26,24 +55,35 @@ function setBlocks() {
 
     for(let i = 1; i <= 3; i++) {
         day = addDays(new Date(), i-1)
-        var dayType = getDayType(day.getDay());
+        var dayType = getDayType(day);
 
+        // awful code for selecting what type of day it is but here we are
         // all day
         if (dayType == 'a'){
             setBlock('#w' + i.toString() + '2',  1800, 2700, "#F94144");
-            setBlock('#w' + i.toString() + '3',  4740, 2700, "#F8961E");
-            setBlock('#w' + i.toString() + '4',  7680, 2700, "#F9AF37");
-            setBlock('#w' + i.toString() + '5', 10620, 2700, "#E2BC65");
+            setBlock('#w' + i.toString() + '3',  4740, 2700, "#F57044");
+            setBlock('#w' + i.toString() + '4',  7680, 2700, "#EDCC43");
+            setBlock('#w' + i.toString() + '5', 10620, 2700, "#FAD12E");
             setBlock('#w' + i.toString() + '6', 15360, 2700, "#90BE6D");
             setBlock('#w' + i.toString() + '7', 18300, 2700, "#4D908E");
             setBlock('#w' + i.toString() + '8', 21240, 2700, "#577590");
             setBlock('#w' + i.toString() + '9', 24180, 2700, "#AE84E1");
         }
         // block day
-        else if (dayType == 'b') {
+        else if (dayType == 'be') {
+            setBlock('#w' + i.toString() + '3',  1800, 5640, "#F57044");
+                   $('#w' + i.toString() + '2').css("display", "none");
+            setBlock('#w' + i.toString() + '5',  7680, 5640, "#FAD12E");
+                   $('#w' + i.toString() + '4').css("display", "none");
+            setBlock('#w' + i.toString() + '7', 15360, 5640, "#4D908E");
+                   $('#w' + i.toString() + '6').css("display", "none");
+            setBlock('#w' + i.toString() + '9', 21240, 5640, "#AE84E1");
+                   $('#w' + i.toString() + '8').css("display", "none");
+        }
+        else if (dayType == 'bo') {
             setBlock('#w' + i.toString() + '2',  1800, 5640, "#F94144");
                    $('#w' + i.toString() + '3').css("display", "none");
-            setBlock('#w' + i.toString() + '4',  7680, 5640, "#F9AF37");
+            setBlock('#w' + i.toString() + '4',  7680, 5640, "#EDCC43");
                    $('#w' + i.toString() + '5').css("display", "none");
             setBlock('#w' + i.toString() + '6', 15360, 5640, "#90BE6D");
                    $('#w' + i.toString() + '7').css("display", "none");
@@ -51,12 +91,22 @@ function setBlocks() {
                    $('#w' + i.toString() + '9').css("display", "none");
         }
         // short day
-        else if (dayType == 's') {
+        else if (dayType == 'se') {
+            setBlock('#w' + i.toString() + '3',  1800, 2700, "#F94144");
+                   $('#w' + i.toString() + '2').css("display", "none");
+            setBlock('#w' + i.toString() + '5',  4740, 2700, "#EDCC43");
+                   $('#w' + i.toString() + '4').css("display", "none");
+            setBlock('#w' + i.toString() + '6', 7680, 3600, "#0E1116", true); // academy
+            setBlock('#w' + i.toString() + '7', 11520, 2700, "#90BE6D");
+                   $('#w' + i.toString() + '8').css("display", "none");
+            setBlock('#w' + i.toString() + '9', 14460, 2700, "#577590");
+        }
+        else if (dayType == 'so') {
             setBlock('#w' + i.toString() + '2',  1800, 2700, "#F94144");
                    $('#w' + i.toString() + '3').css("display", "none");
-            setBlock('#w' + i.toString() + '4',  4740, 2700, "#F9AF37");
+            setBlock('#w' + i.toString() + '4',  4740, 2700, "#EDCC43");
                    $('#w' + i.toString() + '5').css("display", "none");
-            setBlock('#w' + i.toString() + '9', 7680, 3600, "#AE84E1"); // academy
+            setBlock('#w' + i.toString() + '9', 7680, 3600, "#0E1116", true); // academy
             setBlock('#w' + i.toString() + '6', 11520, 2700, "#90BE6D");
                    $('#w' + i.toString() + '7').css("display", "none");
             setBlock('#w' + i.toString() + '8', 14460, 2700, "#577590");
@@ -77,20 +127,26 @@ function setBlocks() {
 
 // finds the corresponding schedule for the day
 function getDayType(date) {
-    switch (date) {
-        case 0:
+    switch (date.getDay()) {
+        case 0: // sunday
             return 'o';
-        case 1:
+        case 1: // monday
             return 'a';
-        case 2:
-            return 'b';
-        case 3:
-            return 'b';
-        case 4:
+        case 2: // tuesday
+            return 'bo';
+        case 3: // wednesday
+            return 'be';
+        case 4: // thursday
             return 'a';
-        case 5:
-            return 's';
-        case 6:
+        case 5: // friday
+
+            // jan 7 was EVEN
+            var knownDate = new Date().setFullYear(2022, 0, 7);
+            if ((date - knownDate) / (1000*60*60*24*7) % 2) {
+                return 'so';
+            }
+            return 'se';
+        case 6: // saturday
             return 'o';
         }
 }
@@ -144,12 +200,15 @@ function updateDate() {
             tilBell.setHours(0)
             tilBell.setSeconds((getOffset(el).top + getOffset(el).height - dateHeight) / windowH * 86400);
             document.querySelector('#until').textContent = "Bell rings in " + tilBell.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'});
-            found = false;
+            $('.timeblock').css("filter", "blur(1px)");
+            $('#w1'+ i.toString()).css("filter", "none");
+            found = true;
         }
     }
     if (!found) {
         $('#line').css("background-color", "#0E111677");
         $('#until').css("opacity", "0");
+        $('.timeblock').css("filter", "none");
     }
 
     // adjust timeline accordingly
@@ -175,7 +234,7 @@ function updateDate() {
     document.querySelector('#day3').textContent = new Date(now.getTime() + 48 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
 
 
-    setBlocks(getDayType(new Date().getDay()));
+    setBlocks(getDayType(new Date()));
 }
 
 $(document).ready(function(){
