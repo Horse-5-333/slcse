@@ -126,7 +126,7 @@ body {
     border-radius: 5px;
     z-index: 1;
     transition: transform 0.4s, filter 0.4s;
-    white-space: pre-line;
+    white-space: pre-wrap;
 }
 
 .dayview {

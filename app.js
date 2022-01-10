@@ -38,12 +38,12 @@ function setBlocks() {
 
         // gets period number and writes the block times and title
         if (academy) {
-            document.querySelector(id).textContent = "Academy\r\n" + start + " - " + end;
+            document.querySelector(id).textContent = "Academy\n" + start + " - " + end;
         }
         else {
             var re = /[0-9]/g;
             var period = (Number(id.match(re)[1]) - 1).toString();
-            document.querySelector(id).textContent = ordinal_suffix_of(Number(period)) + " period\r\n" + start + " - " + end;
+            document.querySelector(id).textContent = ordinal_suffix_of(Number(period)) + " period\n" + start + " - " + end;
         }
     }
 
