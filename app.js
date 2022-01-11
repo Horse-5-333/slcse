@@ -142,7 +142,7 @@ function updateDate() {
             var tilBell = new Date(null);
             tilBell.setHours(0)
             tilBell.setSeconds((getOffset(el).top + getOffset(el).height - dateHeight) / windowH * 86400);
-            document.querySelector('#until').textContent = "Bell rings in " + tilBell.toLocaleTimeString("en-US", {hour:'numeric', minute: '2-digit', second: '2-digit', hour12: false});
+            document.querySelector('#until').textContent = "Bell rings in " + tilBell.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'});
             found = true;
         }
     }
