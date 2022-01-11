@@ -13,17 +13,19 @@ body {
 }
 
 .week {
-    display: flex;
-    width: 60%;
+    display: grid;
+    width: 75%;
     border-left: 2px solid #434e64;
     /* background-color: #0E111655; */
     height: 100vh;
     position: absolute;
     top: 0;
     margin: 0;
-    margin-left: 20%;
+    padding-left: 1vw;
+    margin-left: calc(24% - 2vw);
     margin-top: 100vh;
-    flex-direction: row;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 0.5vw;
 }
 
 .week:hover {
@@ -35,13 +37,13 @@ body {
     height: 300vh;
     position: absolute;
     top: 0;
-    margin-left: 20%;
+    margin-left: 22%;
     border-left: 2px solid #0E111655;
 }
 
 .time {
     font-size: 2rem;
-    width: 19.5%;
+    width: 21.5%;
 }
 
 .date {
@@ -52,7 +54,7 @@ body {
 
 .day {
     font-size: 1.1rem;
-    width: 19.5%
+    width: 21.5%
 }
 
 .line {
@@ -118,10 +120,10 @@ body {
 
 .timeblock {
     position: absolute;
-    width: 30%;
+    width: 97%;
     margin-left: 1%;
     color: #0E1116;
-    padding-left: 1%;
+    padding-left: 3%;
     margin-right: 1%;
     border-radius: 5px;
     z-index: 1;
@@ -130,8 +132,7 @@ body {
 }
 
 .dayview {
-    width: 20vw;
-    display: float;
+    position: relative;
 }
 
 
@@ -148,7 +149,7 @@ html {
 
 .until {
     font-size: 1.5rem;
-    width: 19.5%
+    width: 21.5%
 }
 
 .timeblock:hover {

@@ -53,7 +53,7 @@ function setBlocks() {
         return result;
       }
 
-    for(let i = 1; i <= 3; i++) {
+    for(let i = 1; i <= 5; i++) {
         day = addDays(new Date(), i-1)
         var dayType = getDayType(day);
 
