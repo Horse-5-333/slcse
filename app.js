@@ -122,7 +122,7 @@ function updateDate() {
 
     // gets window height and time 
     var windowH = window.innerHeight * 3;
-    var dateHeight = (getSecondsToday()/86400 * windowH);
+    var dateHeight = (getSecondsToday()/86400 * windowH); // gets the percent of day passed and applies that to the page height
     
     
     // checks if line collides with a block
@@ -140,8 +140,9 @@ function updateDate() {
             $('#until').css("color", color);
 
             var tilBell = new Date(null);
+            tilBell.setHours(0)
             tilBell.setSeconds((getOffset(el).top + getOffset(el).height - dateHeight) / windowH * 86400);
-            document.querySelector('#until').textContent = "Bell rings in " + tilBell.toLocaleTimeString("en-US", {minute: 'numeric', second: '2-digit'});
+            document.querySelector('#until').textContent = "Bell rings in " + tilBell.toLocaleTimeString("en-US", {hour:'numeric', minute: '2-digit', second: '2-digit', hour12: false});
             found = true;
         }
     }
