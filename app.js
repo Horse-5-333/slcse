@@ -8,6 +8,7 @@ function setBlocks() {
         $(id).css("background-color", color + "55");
         $(id).css("border-top", "3px solid " + color + "55");
         $(id).css("color", color);
+        $(id).css("box-shadow", '0 0 1.5vw -0.8vw' + color);
         document.querySelector(id).style.display = "";
         var time = new Date(null);
         time.setSeconds(top - 32400);
@@ -168,7 +169,8 @@ function updateDate() {
 
 
     // set weekdays at top of screen
-    $('#day1').css("color", "#D1495B");
+    $('#day1').css("font-size", "2em");
+    document.querySelector('#day1').textContent = new Date().toLocaleString('en-us', {  weekday: 'long' });
     document.querySelector('#day2').textContent = new Date(now.getTime() + 24 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
     document.querySelector('#day3').textContent = new Date(now.getTime() + 48 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
 

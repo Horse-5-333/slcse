@@ -23,7 +23,7 @@ body {
     margin: 0;
     margin-left: 20%;
     margin-top: 100vh;
-    z-index: -1;
+    z-index: 3;
     flex-direction: row;
 }
 
@@ -47,6 +47,7 @@ body {
     text-align: right;
     z-index: 2;
     position: absolute;
+    z-index: 99;
 }
 
 .day {
@@ -70,6 +71,7 @@ body {
     color: #0E111677;
     margin-left: 0;
     width: 99.5%;
+    z-index: -1;
 }
 
 .tick {
@@ -98,8 +100,8 @@ body {
     width: 60%;
     position: fixed;
     height: 3.4rem;
-    background-color: #0E111611;
-    top: 0;
+    background-color: #0E111600;
+    bottom: 1rem;
     margin-left: 20%;
     border-bottom-right-radius: 2vh;
     border-bottom-left-radius: 2vh;
@@ -111,6 +113,7 @@ body {
     text-align: center;
     font-size: 1.75rem;
     padding-top: calc(2.5vh - 1.25rem);
+    text-shadow: 0 0 1.5em #0E1116;
 }
 
 .timeblock {
@@ -121,14 +124,17 @@ body {
     padding-left: 1%;
     margin-right: 1%;
     border-radius: 5px;
+    z-index: 4;
+    transition: transform 0.4s;
 }
 
 .dayview {
     width: 20vw;
+    display: float;
 }
 
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide scrollbar 0E111610for Chrome, Safari and Opera */
 :-webkit-scrollbar {
     display: none;
 }
@@ -142,6 +148,10 @@ html {
 .until {
     font-size: 1.5rem;
     width: 19.5%
+}
+
+.timeblock:hover {
+    transform: scale(1.025);
 }
 
 @keyframes clockBlink {
