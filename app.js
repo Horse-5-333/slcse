@@ -1,3 +1,5 @@
+var universalDate;
+
 function ordinal_suffix_of(i) {
     var j = i % 10,
         k = i % 100;
@@ -13,6 +15,11 @@ function ordinal_suffix_of(i) {
     return i + "th";
 }
 
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 
 function setBlocks() {
     var windowH = window.innerHeight * 3;
@@ -47,14 +54,16 @@ function setBlocks() {
         }
     }
 
-    function addDays(date, days) {
-        var result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-      }
+
 
     for(let i = 1; i <= 5; i++) {
-        day = addDays(new Date(), i-1)
+        // find offset to first day of week
+        var j = universalDate;
+        while (j.getDay() != 1) {
+            j = addDays(j, -1);
+        }
+
+        day = addDays(j, i-1);
         var dayType = getDayType(day);
 
         // awful code for selecting what type of day it is but here we are
@@ -69,7 +78,7 @@ function setBlocks() {
             setBlock('#w' + i.toString() + '8', 21240, 2700, "#577590");
             setBlock('#w' + i.toString() + '9', 24180, 2700, "#AE84E1");
         }
-        // block day
+        // even day
         else if (dayType == 'be') {
             setBlock('#w' + i.toString() + '3',  1800, 5640, "#F57044");
                    $('#w' + i.toString() + '2').css("display", "none");
@@ -80,6 +89,7 @@ function setBlocks() {
             setBlock('#w' + i.toString() + '9', 21240, 5640, "#AE84E1");
                    $('#w' + i.toString() + '8').css("display", "none");
         }
+        // odd day
         else if (dayType == 'bo') {
             setBlock('#w' + i.toString() + '2',  1800, 5640, "#F94144");
                    $('#w' + i.toString() + '3').css("display", "none");
@@ -90,7 +100,7 @@ function setBlocks() {
             setBlock('#w' + i.toString() + '8', 21240, 5640, "#577590");
                    $('#w' + i.toString() + '9').css("display", "none");
         }
-        // short day
+        // short even
         else if (dayType == 'se') {
             setBlock('#w' + i.toString() + '3',  1800, 2700, "#F94144");
                    $('#w' + i.toString() + '2').css("display", "none");
@@ -101,6 +111,7 @@ function setBlocks() {
                    $('#w' + i.toString() + '8').css("display", "none");
             setBlock('#w' + i.toString() + '9', 14460, 2700, "#577590");
         }
+        // short odd
         else if (dayType == 'so') {
             setBlock('#w' + i.toString() + '2',  1800, 2700, "#F94144");
                    $('#w' + i.toString() + '3').css("display", "none");
@@ -141,7 +152,8 @@ function getDayType(date) {
         case 5: // friday
 
             // jan 7 was EVEN
-            var knownDate = new Date().setFullYear(2022, 0, 7);
+            var knownDate = new Date(universalDate);
+            knownDate.setFullYear(2022, 0, 7);
             if ((date - knownDate) / (1000*60*60*24*7) % 2) {
                 return 'so';
             }
@@ -152,13 +164,15 @@ function getDayType(date) {
 }
 
 function getSecondsToday() {
-    let d = new Date();
+    let d = universalDate;
     return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
 }
 
 function updateDate() {
+    universalDate = new Date();
+
     // formats both date and time strings
-    var now = new Date();
+    var now = universalDate;
     const formatTime =  {
         hour: 'numeric',
         minute: '2-digit'
@@ -181,11 +195,11 @@ function updateDate() {
     var windowH = window.innerHeight * 3;
     var dateHeight = (getSecondsToday()/86400 * windowH); // gets the percent of day passed and applies that to the page height
     
-    
     // checks if line collides with a block
     var found = false;
     for (let i = 2; i <= 9; i++) {
-        let el = document.querySelector('#w1'+ i.toString());
+        var j = universalDate.getDay();
+        let el = document.querySelector('#w' + j.toString() + i.toString());
         if (getOffset(el).top <= dateHeight && getOffset(el).top + getOffset(el).height >= dateHeight) {
             // set color
             var rgba = window.getComputedStyle(el, null).getPropertyValue('border-top-color');
@@ -199,9 +213,14 @@ function updateDate() {
             var tilBell = new Date(null);
             tilBell.setHours(0)
             tilBell.setSeconds((getOffset(el).top + getOffset(el).height - dateHeight) / windowH * 86400);
-            document.querySelector('#until').textContent = "Bell rings in " + tilBell.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'});
+            document.querySelector('#until').textContent = "Bell rings in\n" + tilBell.toLocaleTimeString([], { hourCycle: 'h23', hour: '2-digit', minute: '2-digit', second: '2-digit'});
             $('.timeblock').css("filter", "blur(1px)");
-            $('#w1'+ i.toString()).css("filter", "none");
+            // $('#w' + j.toString() + i.toString()).css("filter", "none");
+            // $('#blocks').css('background', '#00000022');
+            // $('#blocks' + j.toString()).css("background", "#00000000")
+            // $('#blocks' + j.toString()).css("height", "300vh");
+            // $('#blocks' + j.toString()).css("margin-top", "-100vh");
+
             found = true;
         }
     }
@@ -226,15 +245,22 @@ function updateDate() {
     }
     
 
+    var j = universalDate;
+    while (j.getDay() != 1) {
+        j = addDays(j, -1);
+    }
+
 
     // set weekdays at top of screen
-    $('#day1').css("font-size", "2em");
-    document.querySelector('#day1').textContent = new Date().toLocaleString('en-us', {  weekday: 'long' });
-    document.querySelector('#day2').textContent = new Date(now.getTime() + 24 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
-    document.querySelector('#day3').textContent = new Date(now.getTime() + 48 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
+    $('#day1').css("font-size", "1.25em");
+    document.querySelector('#day1').textContent = j.toLocaleString('en-us', {  weekday: 'long' });
+    document.querySelector('#day2').textContent = new Date(j.getTime() + 24 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
+    document.querySelector('#day3').textContent = new Date(j.getTime() + 48 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
+    document.querySelector('#day4').textContent = new Date(j.getTime() + 72 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
+    document.querySelector('#day5').textContent = new Date(j.getTime() + 96 * 60 * 60 * 1000).toLocaleString('en-us', {  weekday: 'long' });
 
 
-    setBlocks(getDayType(new Date()));
+    setBlocks(getDayType(universalDate));
 }
 
 $(document).ready(function(){
